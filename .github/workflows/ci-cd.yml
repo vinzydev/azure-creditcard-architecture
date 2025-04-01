@@ -1,0 +1,31 @@
+name: CI Infrastructure
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Azure CLI
+        uses: azure/CLI@v1
+        with:
+          azcliversion: latest
+          inlineScript: |
+                az --version
+
+      - name: Login to Azure
+        run: |
+          echo "Login to Azure"
+
+      - name: Run Infrastructure Tests
+        run: |
+          # Insert commands here to run your test scripts in the 'tests' folder
+          echo "Running infrastructure tests..."
